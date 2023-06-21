@@ -1,21 +1,17 @@
-import { useWeb3React } from "@web3-react/core";
+import { useEffect } from "react";
 import useYourApp from "./useYourApp";
 
-export default function YourApp() {
-  const { account, activate, deactivate } = useWeb3React();
-  const [balance, disconnectWallet, connectWallet, getAccountBalance] = useYourApp();
-
+export default function YourApp(props) {
+  const [balance, getAccountBalance] = useYourApp();
+  useEffect(() => {
+    if (props.addressWallet) {
+      getAccountBalance(props.addressWallet);
+    }
+  }, [props.addressWallet]);
   return (
     <div>
-      {!account && <button onClick={() => connectWallet(activate)}>Connect Wallet</button>}
-      {account && (
-        <div>
-          <p>Current account: {account}</p>
-          {balance && <p>Current balance: {balance}</p>}
-          <button onClick={() => getAccountBalance(account)}>Get Balance</button>
-          <button onClick={() => disconnectWallet(deactivate)}>Disconnect Wallet</button>
-        </div>
-      )}
+      <p>Current account: {props.addressWallet}</p>
+      <p>Current balance: {balance}</p>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { Web3ReactProvider } from "@web3-react/core";
 import { ethers } from "ethers";
 import React from "react";
 import "./App.css";
-import YourApp from "./components/YourApp/YourApp";
+import ConnectWallets from "./components/ConnectWallet/ConnectWallets";
 
 function getLibrary(provider) {
   const library = new ethers.providers.Web3Provider(provider);
@@ -13,9 +13,8 @@ function getLibrary(provider) {
 function App() {
   return ( 
     <Web3ReactProvider getLibrary={getLibrary}>
-      <YourApp />
-      {/* <GetTx />
-      <Wallet /> */}
+      {/* <YourApp /> */}
+      <ConnectWallets />
     </Web3ReactProvider>
   );
 }

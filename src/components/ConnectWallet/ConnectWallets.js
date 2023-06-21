@@ -2,6 +2,8 @@ import { useWeb3React } from "@web3-react/core";
 import { BINANCE_WALLET, METAMASK_WALLET } from "../../constants/wallet";
 import YourApp from "../YourApp/YourApp";
 import useConnectWallets from "./useConnectWallets";
+import { Button, Form, Input } from 'antd';
+import styles from './ConnectWallet.module.css';
 
 export const supportedChainIdsMeta = [1, 3, 4, 5, 42];
 export const supportedChainIdsBena = [1, 3, 4, 5, 42];
@@ -12,17 +14,15 @@ export default function ConnectWallets() {
 
   return (
     <div>
-      <button onClick={() => handleClick(!showButtons, deactivate)}>
-        Connect Wallet
-      </button>
+      <Button type="primary" onClick={() => handleClick(!showButtons, deactivate)} className={styles.btn}>{!showButtons ? "Connect Wallet" : "Disconect Wallet"}</Button>
       {showButtons && (
         <div>
-          <button onClick={() => connectWallet(METAMASK_WALLET, activate)}>
+          <Button onClick={() => connectWallet(METAMASK_WALLET, activate)} className={styles.btn}>
             Connect with MetaMask
-          </button>
-          <button onClick={() => connectWallet(BINANCE_WALLET, activate)}>
+          </Button>
+          <Button onClick={() => connectWallet(BINANCE_WALLET, activate)} className={styles.btn}>
             Connect with Binance Wallet
-          </button>
+          </Button>
         </div>
       )}
       {account && <YourApp addressWallet={account} />}
